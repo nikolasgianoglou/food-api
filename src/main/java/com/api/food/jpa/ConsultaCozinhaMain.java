@@ -19,6 +19,5 @@ public class ConsultaCozinhaMain {
         for (Cozinha cozinha : cozinhas) {
             System.out.println(cozinha.getNome());
         }
-
     }
 }
