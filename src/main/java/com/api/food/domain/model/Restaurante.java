@@ -26,7 +26,4 @@ public class Restaurante {
     @ManyToOne /* Muitos restaurantes possuem uma cozinha */
     @JoinColumn(name="cozinha_id", nullable = false) // Nesse caso se  eu quiser um nome de coluna diferente eu uso
     private Cozinha cozinha;
-
-    @OneToMany
-    private List<FormaPagamento> formaPagamento;
 }

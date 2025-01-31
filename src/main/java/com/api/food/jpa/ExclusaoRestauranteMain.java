@@ -1,7 +1,6 @@
 package com.api.food.jpa;
 
-import com.api.food.FoodApiApplication;
-import com.api.food.domain.model.Cozinha;
+import com.api.FoodApiApplication;
 import com.api.food.domain.model.Restaurante;
 import com.api.food.domain.repository.RestauranteRepository;
 import org.springframework.boot.WebApplicationType;
