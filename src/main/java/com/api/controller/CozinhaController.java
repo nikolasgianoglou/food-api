@@ -27,7 +27,7 @@ public class CozinhaController {
         return new CozinhasXmlWrapper(cozinhaRepository.listar());
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{cozinhaId}")
     public Cozinha buscar(@PathVariable Long cozinhaId) {
         return cozinhaRepository.buscar(cozinhaId);
