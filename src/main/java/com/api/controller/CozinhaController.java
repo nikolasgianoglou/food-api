@@ -2,6 +2,7 @@ package com.api.controller;
 
 import com.api.food.domain.model.Cozinha;
 import com.api.food.domain.repository.CozinhaRepository;
+import com.api.model.CozinhasXmlWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,14 @@ public class CozinhaController {
     @Autowired
     private CozinhaRepository cozinhaRepository;
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Cozinha> listar() {
         return cozinhaRepository.listar();
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
+    public CozinhasXmlWrapper listarXml() {
+        return new CozinhasXmlWrapper(cozinhaRepository.listar());
     }
 
     @GetMapping(value = "/{cozinhaId}")
