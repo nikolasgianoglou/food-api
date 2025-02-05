@@ -3,7 +3,9 @@ package com.api.controller;
 import com.api.food.domain.model.Cozinha;
 import com.api.food.domain.repository.CozinhaRepository;
 import com.api.model.CozinhasXmlWrapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,5 +45,32 @@ public class CozinhaController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cozinha adicionar(@RequestBody Cozinha cozinha) {
         return cozinhaRepository.salvar(cozinha);
+    }
+
+    @PutMapping("/{cozinhaId}")
+    public ResponseEntity<Cozinha> atualizar(@PathVariable("cozinhaId") Long id, @RequestBody Cozinha cozinha) {
+        Cozinha cozinhaAtual = cozinhaRepository.buscar(id);
+
+        if (cozinhaAtual != null) {
+            //        cozinhaAtual.setNome(cozinha.getNome());
+            BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+            cozinhaAtual = cozinhaRepository.salvar(cozinhaAtual);
+            return ResponseEntity.ok(cozinhaAtual);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cozinha> remover(@PathVariable Long id) {
+        try {
+            Cozinha cozinha = cozinhaRepository.buscar(id);
+            if(cozinha != null) {
+                cozinhaRepository.remover(cozinha);
+                return ResponseEntity.noContent().build(); //ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+            }
+            return ResponseEntity.notFound().build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 }
