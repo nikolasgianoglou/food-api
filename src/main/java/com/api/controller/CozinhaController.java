@@ -1,5 +1,7 @@
 package com.api.controller;
 
+import com.api.food.domain.exception.EntidadeEmUsoException;
+import com.api.food.domain.exception.EntidadeNaoEncontradaException;
 import com.api.food.domain.model.Cozinha;
 import com.api.food.domain.repository.CozinhaRepository;
 import com.api.food.domain.service.CadastroCozinhaService;
@@ -67,13 +69,11 @@ public class CozinhaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Cozinha> remover(@PathVariable Long id) {
         try {
-            Cozinha cozinha = cozinhaRepository.buscar(id);
-            if(cozinha != null) {
-                cozinhaRepository.remover(cozinha);
-                return ResponseEntity.noContent().build(); //ResponseEntity.status(HttpStatus.NO_CONTENT).build()
-            }
+            cadastroCozinha.excluir(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
-        } catch (DataIntegrityViolationException e) {
+        } catch (EntidadeEmUsoException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
