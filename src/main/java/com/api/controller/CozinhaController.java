@@ -8,8 +8,6 @@ import com.api.food.domain.service.CadastroCozinhaService;
 import com.api.model.CozinhasXmlWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +42,6 @@ public class CozinhaController {
             return ResponseEntity.ok(cozinha);
         }
         return ResponseEntity.notFound().build();
-//        return cozinha != null ? ResponseEntity.ok(cozinha) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping
