@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,8 +36,13 @@ public class CidadeRepositoryImp implements CidadeRepository {
 
     @Transactional
     @Override
-    public void remover(Cidade cidade) {
-        cidade = buscar(cidade.getId());
+    public void remover(Long id) {
+        Cidade cidade = buscar(id);
+
+        if(cidade == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
+
         manager.remove(cidade);
     }
 }
