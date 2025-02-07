@@ -79,6 +79,6 @@ public class RestauranteController {
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
-        } 
+        }
     }
 }
