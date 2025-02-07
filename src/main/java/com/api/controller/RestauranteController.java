@@ -1,5 +1,6 @@
 package com.api.controller;
 
+import com.api.food.domain.exception.EntidadeEmUsoException;
 import com.api.food.domain.exception.EntidadeNaoEncontradaException;
 import com.api.food.domain.model.Cozinha;
 import com.api.food.domain.model.Restaurante;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,5 +70,15 @@ public class RestauranteController {
                     .badRequest()
                     .body(e.getMessage());
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        try {
+            cadastroRestaurante.excluir(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException e) {
+            return ResponseEntity.notFound().build();
+        } 
     }
 }
