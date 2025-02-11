@@ -12,33 +12,33 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public class PermissaoRepositoryImp implements PermissaoRepository {
-
-    @PersistenceContext
-    private EntityManager manager;
-
-    @Override
-    public List<Permissao> listar() {
-        TypedQuery<Permissao> query = manager.createQuery("from Permissao", Permissao.class);
-        return query.getResultList();
-    }
-
-    @Override
-    public Permissao buscar(Long id) {
-        return manager.find(Permissao.class, id);
-    }
-
-    @Transactional
-    @Override
-    public Permissao salvar(Permissao permissao) {
-        return manager.merge(permissao);
-    }
-
-    @Transactional
-    @Override
-    public void remover(Permissao permissao) {
-        permissao = buscar(permissao.getId());
-        manager.remove(permissao);
-    }
-}
+//@Repository
+//public class PermissaoRepositoryImp implements PermissaoRepository {
+//
+//    @PersistenceContext
+//    private EntityManager manager;
+//
+//    @Override
+//    public List<Permissao> listar() {
+//        TypedQuery<Permissao> query = manager.createQuery("from Permissao", Permissao.class);
+//        return query.getResultList();
+//    }
+//
+//    @Override
+//    public Permissao buscar(Long id) {
+//        return manager.find(Permissao.class, id);
+//    }
+//
+//    @Transactional
+//    @Override
+//    public Permissao salvar(Permissao permissao) {
+//        return manager.merge(permissao);
+//    }
+//
+//    @Transactional
+//    @Override
+//    public void remover(Permissao permissao) {
+//        permissao = buscar(permissao.getId());
+//        manager.remove(permissao);
+//    }
+//}
