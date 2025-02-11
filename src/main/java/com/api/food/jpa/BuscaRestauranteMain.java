@@ -7,13 +7,15 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Optional;
+
 public class BuscaRestauranteMain {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new SpringApplicationBuilder(FoodApiApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
         RestauranteRepository restauranteRepository = applicationContext.getBean(RestauranteRepository.class);
-        Restaurante restaurante = restauranteRepository.buscar(1L);
-        System.out.println(restaurante.getNome());
+        Optional<Restaurante> restaurante = restauranteRepository.findById(1L);
+        System.out.println(restaurante.get().getNome());
     }
 }

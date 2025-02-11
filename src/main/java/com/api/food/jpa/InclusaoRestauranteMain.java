@@ -21,8 +21,8 @@ public class InclusaoRestauranteMain {
         Restaurante restaurante2 = new Restaurante();
         restaurante2.setNome ("Japonesa");
         restaurante2.setTaxaFrete(new BigDecimal("2000"));
-        restaurante1 = restauranteRepository.salvar(restaurante1);
-        restaurante2 = restauranteRepository.salvar (restaurante2);
+        restaurante1 = restauranteRepository.save(restaurante1);
+        restaurante2 = restauranteRepository.save(restaurante2);
 
         System.out.println();
         System.out.printf("%d - %s\n", restaurante1.getId(), restaurante1.getNome() );

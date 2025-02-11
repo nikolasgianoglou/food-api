@@ -20,7 +20,7 @@ public class AlteracaoRestauranteMain {
         restaurante.setNome ("Geraldo");
         restaurante.setTaxaFrete(new BigDecimal("10.50"));
 
-        restauranteRepository.salvar(restaurante);
+        restauranteRepository.save(restaurante);
         System.out.printf("%d - %s\n", restaurante.getId(), restaurante.getNome());
     }
 }
