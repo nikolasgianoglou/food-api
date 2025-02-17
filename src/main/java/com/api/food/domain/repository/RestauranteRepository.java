@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
     List<Restaurante> findByTaxaFreteBetween(BigDecimal taxaInicial, BigDecimal taxaFinal); //prefixo para consultafind, query, get, stream, read
 
 //    @Query("from Restaurante where nome like %:nome% and cozinha.id = :id")
@@ -25,7 +25,4 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
     boolean existsByNome(String nome);
 
     int countByCozinhaId(Long cozinhaId);
-
-    public List<Restaurante> find(String nome,
-                                  BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
 }
