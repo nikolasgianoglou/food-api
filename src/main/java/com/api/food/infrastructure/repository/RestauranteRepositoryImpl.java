@@ -5,6 +5,8 @@ import com.api.food.domain.repository.RestauranteRepositoryQueries;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -64,6 +66,18 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 
         parametros.forEach((chave, valor) -> query.setParameter(chave, valor));
         return query.getResultList();
+    }
+
+    //Criteria API > API do JPA para criacao de queries de forma programatica
+
+    public List<Restaurante> findWithCriteriaAPI(String nome,
+                                                 BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
+        criteria.from(Restaurante.class); //"from Restaurante"
+
+        TypedQuery<Restaurante> restauranteTypedQuery =  manager.createQuery(criteria);
+        return restauranteTypedQuery.getResultList();
     }
 
 }
