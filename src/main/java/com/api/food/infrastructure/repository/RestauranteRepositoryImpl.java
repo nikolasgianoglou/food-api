@@ -93,7 +93,7 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
         if (taxaFreteFinal != null) {
             builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFreteFinal);
         }
-        
+
         criteria.where(predicates.toArray(new Predicate[0])); //como esse metodo aceita um array eu uso o toArray, passando uma instancia de um novo array vazio do tipo que quero
 
         TypedQuery<Restaurante> restauranteTypedQuery =  manager.createQuery(criteria);
